@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(78, 159, 61, 0.6);
+}
+
+.step-connector {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #4E9F3D, transparent);
+  transform: translateX(-50%);
+  z-index: 0;
+  box-shadow: 0 0 15px rgba(78, 159, 61, 0.5);
+}
+
+.reveal-container {
+  overflow: hidden;
+  display: block;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #191A19; 
+}
+::-webkit-scrollbar-thumb {
+  background: #4E9F3D; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3c7e2f; 
+}
+
+.card-interaction {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card-interaction:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px -10px rgba(78, 159, 61, 0.3);
+  border-color: #4E9F3D;
+}
