@@ -1,6 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* 1. @import "tailwindcss"; replaces the old @tailwind base/components/utilities directives.
+   2. @config "../tailwind.config.js"; explicitly loads your JS config file so your custom colors work.
+*/
 
 @layer utilities {
   .glow-text {
@@ -36,6 +39,7 @@
 
 @layer base {
   :root {
+    /* fallback added to theme() just in case, but @config should fix the resolution */
     --bg-light: theme('colors.background-light', '#f6f8f6');
     --bg-dark: theme('colors.background-dark', '#191A19');
   }
