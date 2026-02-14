@@ -3,6 +3,13 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  safelist: [
+    'bg-background-light',
+    'bg-background-dark',
+    'text-slate-800',
+    'text-gray-100',
+    'font-display',
+  ],
   darkMode: "class",
   theme: {
     extend: {
