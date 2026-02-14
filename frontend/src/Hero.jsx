@@ -1,26 +1,93 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const Hero = () => {
+  const containerRef = useRef(null);
+  const badgeRef = useRef(null);
+  const titleRef = useRef(null);
+  const textRef = useRef(null);
+  const buttonsRef = useRef(null);
+  const statsRef = useRef(null);
+  const cardRef = useRef(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // Sequence Animations
+    tl.from(badgeRef.current, {
+      y: 30,
+      opacity: 0,
+      duration: 0.8
+    })
+    .from(titleRef.current.children, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2
+    }, "-=0.4")
+    .from(textRef.current, {
+      y: 20,
+      opacity: 0,
+      duration: 0.8
+    }, "-=0.6")
+    .from(buttonsRef.current.children, {
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1
+    }, "-=0.6")
+    .from(statsRef.current, {
+      y: 20,
+      opacity: 0,
+      duration: 0.8
+    }, "-=0.6")
+    .from(cardRef.current, {
+      x: 100,
+      opacity: 0,
+      duration: 1.2,
+      ease: 'power2.out'
+    }, "-=1.0");
+
+    // Continuous Floating Animation for the Card
+    gsap.to(cardRef.current, {
+      y: -20,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+
+  }, { scope: containerRef });
+
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <section ref={containerRef} className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern bg-[length:40px_40px] opacity-[0.08] dark:opacity-[0.05]"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           <div className="text-left space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold tracking-wide uppercase animate-fade-in-up">
+            
+            {/* Badge */}
+            <div ref={badgeRef} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold tracking-wide uppercase">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
               New Career Modules v2.0
             </div>
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-onyx dark:text-white">
-              <span className="reveal-container"><span className="block animate-text-reveal" style={{animationDelay: '0.2s'}}>Navigate Your</span></span>
-              <span className="reveal-container"><span className="block text-primary glow-text animate-text-reveal" style={{animationDelay: '0.35s'}}>Career Path</span></span>
-              <span className="reveal-container"><span className="block animate-text-reveal" style={{animationDelay: '0.5s'}}>with Precision.</span></span>
+            
+            {/* Title */}
+            <h1 ref={titleRef} className="text-5xl lg:text-7xl font-bold leading-tight text-onyx dark:text-white">
+              <span className="block">Navigate Your</span>
+              <span className="block text-primary glow-text">Career Path</span>
+              <span className="block">with Precision.</span>
             </h1>
-            <p className="text-xl text-text-muted-light dark:text-gray-400 max-w-lg leading-relaxed animate-fade-in-up opacity-0" style={{animationDelay: '0.8s'}}>
+            
+            {/* Description */}
+            <p ref={textRef} className="text-xl text-text-muted-light dark:text-gray-400 max-w-lg leading-relaxed">
               Stop guessing your next move. Follow our data-driven, step-by-step guides to unlock your potential and double your salary.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up opacity-0" style={{animationDelay: '1s'}}>
+            
+            {/* Buttons */}
+            <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4">
               <button className="group bg-primary hover:bg-primary-dark text-white text-lg px-8 py-4 rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 transform hover:-translate-y-1">
                 Start Your Journey
                 <span className="material-icons text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
@@ -30,7 +97,9 @@ const Hero = () => {
                 Watch Demo
               </button>
             </div>
-            <div className="pt-8 border-t border-black/10 dark:border-white/10 flex items-center gap-8 animate-fade-in-up opacity-0" style={{animationDelay: '1.2s'}}>
+            
+            {/* Stats */}
+            <div ref={statsRef} className="pt-8 border-t border-black/10 dark:border-white/10 flex items-center gap-8">
               <div>
                 <p className="text-3xl font-bold text-onyx dark:text-white">50k+</p>
                 <p className="text-sm text-text-muted-light dark:text-gray-400">Careers Launched</p>
@@ -43,8 +112,10 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="relative lg:h-[600px] w-full flex items-center justify-center animate-float">
-            <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-black/5 dark:border-primary/20 bg-sage dark:bg-card-darker group">
+          {/* Hero Image / Card */}
+          <div className="relative lg:h-[600px] w-full flex items-center justify-center">
+            {/* Added ref={cardRef} here and removed animate-float class */}
+            <div ref={cardRef} className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-black/5 dark:border-primary/20 bg-sage dark:bg-card-darker group">
               <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent"></div>
               
               <div className="absolute inset-0 p-8 flex flex-col justify-between">

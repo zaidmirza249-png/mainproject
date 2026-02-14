@@ -14,7 +14,7 @@ const LandingPage = () => {
         <Roadmap />
         <Pricing />
       </main>
-      <Footer />
+   
     </div>
   );
 };
