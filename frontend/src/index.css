@@ -36,13 +36,13 @@
 
 @layer base {
   :root {
-    --bg-light: theme('colors.background-light');
-    --bg-dark: theme('colors.background-dark');
+    --bg-light: theme('colors.background-light', '#f6f8f6');
+    --bg-dark: theme('colors.background-dark', '#191A19');
   }
 
   body {
     background-color: var(--bg-light);
-    color: theme('colors.slate.800');
+    color: theme('colors.text-main-light');
     font-family: theme('fontFamily.display');
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -53,6 +53,6 @@
 
   .dark body {
     background-color: var(--bg-dark);
-    color: theme('colors.gray.100');
+    color: theme('colors.text-main-dark');
   }
 }
